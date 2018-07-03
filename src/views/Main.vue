@@ -5,7 +5,7 @@
         padding: 8px;
         text-align: center;
         img {
-            height: 44px;
+            height: 60px;
             width: auto;
         }
     }

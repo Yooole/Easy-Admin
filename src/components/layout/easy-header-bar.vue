@@ -52,6 +52,9 @@
         methods: {
             toggleCollapse() {
                 this.$store.commit('changeCollapse', !this.isCollapse)
+            },
+            logout() {
+
             }
         }
     }
