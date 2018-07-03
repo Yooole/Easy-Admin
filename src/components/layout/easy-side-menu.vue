@@ -1,11 +1,14 @@
 <template>
-    <el-aside class="side-menu-container" :style="{width: folding ? '64px' : '180px', overflow: folding ? 'visible' : 'auto'}">
-        <el-menu class="side-menu" :collapse-transition="false" :collapse="folding"
-                 :default-active="$route.path" background-color="#304156" text-color="rgb(191, 203, 217)" active-text-color="rgb(64, 158, 255)">
+    <el-aside  class="sidebar-menu-con" :style="{width: isCollapse ? '64px' : '180px', overflow: isCollapse ? 'visible' : 'auto'}">
+        <el-menu class="ivu-shrinkable-menu" :collapse-transition="false" :collapse="isCollapse" :default-active="$route.path"
+                 background-color="#304156"
+                 text-color="rgb(191, 203, 217)"
+                 active-text-color="rgb(64, 158, 255)">
+            <slot name="logo"></slot>
             <el-submenu index="1">
                 <template slot="title">
                     <i class="el-icon-location"></i>
-                    <span>导航菜单</span>
+                    <span>导航菜单栏</span>
                 </template>
                 <el-menu-item-group>
                     <template slot="title">分组一</template>
@@ -38,29 +41,10 @@
 <script>
     export default {
         name: 'EasySideMenu',
-        props: {
-            folding: {
-                type: Boolean,
-                default: false
+        computed: {
+            isCollapse () {
+                return this.$store.getters.is_collapse;
             }
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    .side-menu-container {
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 21;
-        transition: width .3s;
-        .side-menu{
-            box-sizing: border-box;
-            padding-top: 39px;
-            height: 100%;
-            width: 100%;
-        }
-    }
-</style>
