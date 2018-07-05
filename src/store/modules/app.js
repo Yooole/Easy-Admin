@@ -1,11 +1,12 @@
 const app = {
     state: {
         menu: [1],
-        isCollapse: false
+        isCollapse: localStorage.getItem('isCollapse') === 'true'
     },
     mutations: {
         changeCollapse: (state, status = true) => {
-            state.isCollapse = status
+            state.isCollapse = status;
+            localStorage.setItem('isCollapse', status);
         }
     },
     actions: {
