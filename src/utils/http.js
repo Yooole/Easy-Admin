@@ -6,16 +6,13 @@ import { getToken } from "./auth";
 // create an axios instance
 const instance = axios.create({
     baseURL: process.env.BASE_API,
+    withCredentials: true,
     timeout: 30000
 });
 
 //http request 拦截器
 instance.interceptors.request.use(request => {
-    //将COOKIE中的TOKEN传给后台验证是否有效，防止COOKIE被盗用
     request.data = qs.stringify(request.data);
-    request.headers = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    };
     return request;
 }, error => {
     return Promise.reject(error);
@@ -30,7 +27,7 @@ instance.interceptors.response.use(response => {
         message: error.message,
         type: 'error',
         duration: 5 * 1000
-    })
+    });
     return Promise.reject(error);
 });
 
